@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting...</title>
+  <script>
+    async function logVisitorInfo() {
+      const ipResponse = await fetch('https://api.ipify.org?format=json');
+      const ipData = await ipResponse.json();
+
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const screenSize = `${window.screen.width}x${window.screen.height}`;
+      const userAgent = navigator.userAgent;
+
+      const log = {
+        ip: ipData.ip,
+        timezone: timezone,
+        screenSize: screenSize,
+        userAgent: userAgent,
+        timestamp: new Date().toLocaleString()
+      };
+
+      // Send data to your Google Sheet or Form (or console for now)
+      console.log(log); // for testing
+    }
+
+    logVisitorInfo();
+    setTimeout(() => {
+      window.location.href = "https://www.youtube.com"; // redirect destination
+    }, 3000);
+  </script>
+</head>
+<body>
+  <p>Loading... please wait</p>
+</body>
+</html>
